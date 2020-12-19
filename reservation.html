@@ -50,10 +50,10 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+						<li class="nav-item "><a class="nav-link" href="index.html">Home</a></li>
+						
 						<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-						<li class="nav-item dropdown">
+						<li class="nav-item active dropdown">
 							<a class="nav-link "  href="reservation.html">Book A Room</a>
 							<!-- <div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="Book A Room.html">Book A Room</a>
@@ -62,13 +62,14 @@
 							</div> -->
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link " href="availability.html" >Availbility</a>
+							<a class="nav-link " href="availability.html" >Add A Room</a>
 							<!-- <div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="blog.html">blog</a>
 								<a class="dropdown-item" href="blog-details.html">blog Single</a>
 							</div> -->
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="menu.html">Login/SignUp</a></li>
 					</ul>
 				</div>
 			</div>
@@ -104,7 +105,7 @@
 					<div class="contact-block">
 						<form id="contactForm">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<h3>General Info</h3>
 									<div class="col-md-12">
 										<div class="form-group">
@@ -136,8 +137,32 @@
 											<div class="help-block with-errors"></div>
 										</div> 
 									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="person" required data-error="Select Room Type">
+											  <option disabled selected>Select Room Type*</option>
+											  <option value="Delux">Delux</option>
+											  <option value="Single">Single</option>
+											  <option value="Dual">Dual </option>
+											  
+											</select>
+											<div class="help-block with-errors"></div>
+										</div> 
+									</div>
+								
+								<div class="col-md-12">
+									<div class="form-group">
+										<select class="custom-select d-block form-control" id="person" required data-error="Please select Room Number">
+										  <option disabled selected>Please select Room Number</option>
+										  <option value="1">D201</option>
+										  <option value="2">D302</option>
+										  <option value="3">D403</option>
+										  
+										</select>
+										<div class="help-block with-errors"></div>
+									</div> 
 								</div>
-								<div class="col-md-6">
+								<!-- <div class="col-md-6">
 									<h3>Contact Details</h3>
 									<div class="col-md-12">
 										<div class="form-group">
@@ -163,7 +188,7 @@
 											<div class="help-block with-errors"></div>
 										</div> 
 									</div>
-								</div>
+								</div> -->
 								<div class="col-md-12">
 									<div class="submit-button text-center">
 										<button class="btn btn-common" id="submit" type="submit">Book Room</button>

@@ -50,8 +50,8 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="menu.html">Menu</a></li>
+						<li class="nav-item "><a class="nav-link" href="index.html">Home</a></li>
+						
 						<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
 						<li class="nav-item dropdown">
 							<a class="nav-link "  href="reservation.html">Book A Room</a>
@@ -61,14 +61,15 @@
 								<a class="dropdown-item" href="gallery.html">Gallery</a>
 							</div> -->
 						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link " href="availability.html" >Availbility</a>
+						<li class="nav-item  active  dropdown">
+							<a class="nav-link" href="availability.html" >Add A Room</a>
 							<!-- <div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="blog.html">blog</a>
 								<a class="dropdown-item" href="blog-details.html">blog Single</a>
 							</div> -->
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="menu.html">Login/SignUp</a></li>
 					</ul>
 				</div>
 			</div>
@@ -81,7 +82,7 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Rooms Availability</h1>
+					<h1>Add A New Room</h1>
 				</div>
 			</div>
 		</div>
@@ -94,8 +95,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Check Availability Here</h2>
-						<p>Book Room Details</p>
+						<h2>Add Rooms Here</h2>
+						<p>Room Details</p>
 					</div>
 				</div>
 			</div>
@@ -108,20 +109,49 @@
 									<h3>General Info</h3>
 									<div class="col-md-12">
 										<div class="form-group">
-											<input id="input_date" class="datepicker picker__input form-control" name="date" type="text" value="" equired data-error="Please enter Date" placeholder="Check In Date">
+											<input id="input_id" class=" form-control" name="date" type="text" value="" equired data-error="Please enter Id" placeholder="Room Id">
+											<div class="help-block with-errors"></div>
+										</div>                                 
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<input id="input_number" class=" form-control" name="date" type="text" value="" equired data-error="Please Enter Room Number" placeholder="Room Number">
 											<div class="help-block with-errors"></div>
 										</div>                                 
 									</div>
 									
-									
 									<div class="col-md-12">
 										<div class="form-group">
-											<select class="custom-select d-block form-control" id="person" required data-error="Please select Room Number">
-											  <option disabled selected>Please select Room Number</option>
-											  <option value="1">D201</option>
-											  <option value="2">D302</option>
-											  <option value="3">D403</option>
+											<select class="custom-select d-block form-control" id="type" required data-error="Please select Room Type">
+											  <option disabled selected>Please select Room Type</option>
+											  <option value="1">Delux</option>
+											  <option value="2">Single</option>
+											  <option value="3">Multiple</option>
 											  
+											</select>
+											<div class="help-block with-errors"></div>
+										</div> 
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="capability" required data-error="Please select Room Capability">
+											  <option disabled selected>Please select Room Space</option>
+											  <option value="1">1</option>
+											  <option value="2">2</option>
+											  <option value="3">3</option>
+											  
+											</select>
+											<div class="help-block with-errors"></div>
+										</div> 
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<select class="custom-select d-block form-control" id="capability" required data-error="Please select Room Capability">
+											  <option disabled selected>Extra Features Availability? (Optional)</option>
+											  <option value="1">Swimming Pool Side</option>
+											  <option value="2">Fresh Ventillation</option>
+											  <option value="3">Free Dining Type</option>
+											  <option value="3">VIP</option>
 											</select>
 											<div class="help-block with-errors"></div>
 										</div> 
@@ -130,7 +160,7 @@
 							
 								<div class="col-md-12">
 									<div class="submit-button text-center">
-										<button class="btn btn-common" id="submit" type="submit">Check Availability</button>
+										<button class="btn btn-common" id="submit" type="submit">Add Room</button>
 										<div id="msgSubmit" class="h3 text-center hidden"></div> 
 										<div class="clearfix"></div> 
 									</div>
