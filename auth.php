@@ -1,33 +1,87 @@
 <?php
-	require('./templates/head.php');
-	require('./config/dbConnect.php');
+require('./templates/head.php');
+require('./config/dbConnect.php');
 
-	if (isset($_POST['signup'])) {
-		$name = mysqli_real_escape_string($conn, $_POST['name']);
-		$email = mysqli_real_escape_string($conn, $_POST['email']);	
-		$password = mysqli_real_escape_string($conn, $_POST['password']);
-		$cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
-		$phone = mysqli_real_escape_string($conn, $_POST['phone']);
+session_unset();
 
-		if ($password == $cpassword) {
-			$hash = password_hash($password, PASSWORD_DEFAULT);
-			echo ($name . $email . $hash . $phone);
-			$isAdmin = true;
-			$sql = "INSERT INTO registrations(name, email, password, phone, isAdmin) VALUES('$name', '$email', '$hash', '$phone', $isAdmin)";
-			if (mysqli_query($conn, $sql)) {
-				header('Location: index.php');
-			} else {
-				echo 'query error' . mysqli_error($conn);
-			}
+if (isset($_POST['signup'])) {
+	$name = mysqli_real_escape_string($conn, $_POST['name']);
+	$email = mysqli_real_escape_string($conn, $_POST['email']);
+	$password = mysqli_real_escape_string($conn, $_POST['password']);
+	$cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
+	$phone = mysqli_real_escape_string($conn, $_POST['phone']);
+
+	if ($password == $cpassword) {
+		$hash = password_hash($password, PASSWORD_DEFAULT);
+		echo ($name . $email . $hash . $phone);
+		$isAdmin = false;
+		$sql = "INSERT INTO registrations(name, email, password, phone, isAdmin) VALUES('$name', '$email', '$hash', '$phone', $isAdmin)";
+		if (mysqli_query($conn, $sql)) {
+			header('Location: index.php');
+		} else {
+			echo 'query error' . mysqli_error($conn);
 		}
 	}
+}
 
-	if(isset($_POST)) {
-		$regEmail = mysqli_real_escape_string($conn, $_POST['reg-email']);
-		$regPass = mysqli_real_escape_string($conn, $_POST['reg-pass']);
 
-		
-	}
+if (isset($_POST['login'])) {
+	$regEmail = mysqli_real_escape_string($conn, $_POST['reg-email']);
+	$regPass = mysqli_real_escape_string($conn, $_POST['reg-pass']);
+
+	// write query for all emails
+	$allEmailsSql = "SELECT email, password, isAdmin from registrations";
+	// get the result set (set of rows)
+	$allEmalsRes =  mysqli_query($conn, $allEmailsSql);
+	// fetch the resulting rows as an array
+	$allEmailsArr = mysqli_fetch_all($allEmalsRes, MYSQLI_ASSOC);
+	// print_r($allEmailsArr);
+
+	// free the $result from memory (good practise)
+	mysqli_free_result($allEmalsRes);
+
+	// class sessionInfo {		
+	// 	var $sessionName;
+	// 	var $sessionStatus;
+
+	// 	function setStatus($s) {
+	// 		$this-> sessionStatus = $s;
+	// 	}
+
+	// 	function setName($n) {
+	// 		$this-> sessionName = $n;
+	// 	} 
+	// }
+
+	foreach($allEmailsArr as $e):
+		// print_r($e);
+		if($regEmail == $e['email']) {
+			// echo $e['email'];
+			$verfiyPassword = password_verify($regPass, $e['password']); 
+			if($verfiyPassword) {
+				echo ("CORRECT");
+				// $sess = new sessionInfo;
+				// $sess -> setName($regEmail);
+				// $sess -> setStatus($e['isAdmin']);
+				// unset($_SESSION['user']);
+				session_start(); 
+				$_SESSION['user'] = $regEmail;
+				$_SESSION['userStatus'] = $e['isAdmin'];
+				print_r($_SESSION['user']);
+				print_r($_SESSION['userStatus']);
+				header('Location: index.php');
+			}	else {
+				echo "INCORRECT";
+			}
+		}
+	endforeach;
+
+
+	// close connection
+	mysqli_close($conn);   
+
+
+}
 
 ?>
 
@@ -118,7 +172,7 @@
 							</div>
 						</div>
 						<div class="col-md-12">
-							<div class="submit-button text-center"> 
+							<div class="submit-button text-center">
 								<button class="btn btn-common" id="submit" type="submit" name="login">Login</button>
 								<div id="msgSubmit" class="h3 text-center hidden"></div>
 								<div class="clearfix"></div>
@@ -134,4 +188,4 @@
 
 
 
-<?php require('./templates/end.php') ?>
+<?php require("./templates/end.php") ?>
