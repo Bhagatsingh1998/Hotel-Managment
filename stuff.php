@@ -39,32 +39,34 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
 				<a class="navbar-brand" href="index.html">
-					<img src="images/logo.png" alt="" />
+					<img src="images/logo.png" style="height: 80px;" alt="" />
 				</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
-				  <span class="navbar-toggler-icon"></span>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food"
+					aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-						<li class="nav-item"><a class="nav-link" href="auth.html">Menu</a></li>
+						<li class="nav-item  active"><a class="nav-link" href="index.html">Home</a></li>
+
 						<li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-						<li class="nav-item active dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Pages</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="reservation.html">Reservation</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link " href="reservation.html">Book A Room</a>
+							<!-- <div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="Book A Room.html">Book A Room</a>
 								<a class="dropdown-item" href="stuff.html">Stuff</a>
 								<a class="dropdown-item" href="gallery.html">Gallery</a>
-							</div>
+							</div> -->
 						</li>
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+							<a class="nav-link " href="availability.html">Add A Room</a>
+							<!-- <div class="dropdown-menu" aria-labelledby="dropdown-a">
 								<a class="dropdown-item" href="blog.html">blog</a>
 								<a class="dropdown-item" href="blog-details.html">blog Single</a>
-							</div>
+							</div> -->
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="auth.html">Login/SignUp</a></li>
 					</ul>
 				</div>
 			</div>
@@ -77,61 +79,73 @@
 		<div class="container text-center">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1>Gallery</h1>
+					<h1>Stuff</h1>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- End All Pages -->
 	
-	<!-- Start Gallery -->
-	<div class="gallery-box">
-		<div class="container-fluid">
+	<!-- Start Stuff -->
+	<div class="stuff-box">
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="heading-title text-center">
-						<h2>Gallery</h2>
+						<h2>Stuff</h2>
 						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
 					</div>
 				</div>
 			</div>
-			<div class="tz-gallery">
-				<div class="row">
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-01.jpg">
-							<img class="img-fluid" src="images/gallery-img-01.jpg" alt="Gallery Images">
-						</a>
+			<div class="row">
+				<div class="col-md-4 col-sm-6">
+					<div class="our-team">
+						<img src="images/stuff-img-01.jpg">
+						<div class="team-content">
+							<h3 class="title">Williamson</h3>
+							<span class="post">Web Developer</span>
+							<ul class="social">
+								<li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
 					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-02.jpg">
-							<img class="img-fluid" src="images/gallery-img-02.jpg" alt="Gallery Images">
-						</a>
+				</div>
+
+				<div class="col-md-4 col-sm-6">
+					<div class="our-team">
+						<img src="images/stuff-img-02.jpg">
+						<div class="team-content">
+							<h3 class="title">Kristiana</h3>
+							<span class="post">Web Designer</span>
+							<ul class="social">
+								<li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
 					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-03.jpg">
-							<img class="img-fluid" src="images/gallery-img-03.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-12 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-04.jpg">
-							<img class="img-fluid" src="images/gallery-img-04.jpg" alt="Gallery Images">
-						</a>
-					</div>
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-05.jpg">
-							<img class="img-fluid" src="images/gallery-img-05.jpg" alt="Gallery Images">
-						</a>
-					</div> 
-					<div class="col-sm-6 col-md-4 col-lg-4">
-						<a class="lightbox" href="images/gallery-img-06.jpg">
-							<img class="img-fluid" src="images/gallery-img-06.jpg" alt="Gallery Images">
-						</a>
+				</div>
+
+				<div class="col-md-4 col-sm-6">
+					<div class="our-team">
+						<img src="images/stuff-img-02.jpg">
+						<div class="team-content">
+							<h3 class="title">Steve Thomas</h3>
+							<span class="post">Web Developer</span>
+							<ul class="social">
+								<li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End Gallery -->
+	<!-- End Stuff -->
 	
 	<!-- Start Customer Reviews -->
 	<div class="customer-reviews-box">
