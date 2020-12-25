@@ -4,30 +4,31 @@ session_start();
 if(isset($_POST['signout'])) {
 	echo 'Signout';
 	//  $unsetStatus = session_unset();
-	unset($_SESSION['user']);
-	unset($_SESSION['userStatus']);
-	 if(!$_SESSION['user'] && !$_SESSION['userStatus']) {
+	unset($_SESSION['userId']);
+	unset($_SESSION['userEmail']);
+	unset($_SESSION['userIsAdmin']);
+	 if(!$_SESSION['userId'] && !$_SESSION['userId']) {
 		 header('Location: ../index.php');
 	 } else {
-		 echo "aaaa";
-		 print($unsetStatus);
+		//  print($unsetStatus);
 	 }
 }
 // if (isset($_SESSION)) {
-$sessName;
-$sessStatus;
+$sessUserId;
+$sessUserEmail;
+$sessUserIsAdmin;
 
-if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
-	print_r($_SESSION['user']);
-	// print_r($_SESSION['userStatus']);
-	$sessName = $_SESSION['user'];
-	$sessStatus = $_SESSION['userStatus'];
+if (isset($_SESSION['userEmail']) && !empty($_SESSION['userEmail'])) {
+	print_r($_SESSION['userId']. $_SESSION['userIsAdmin']. $_SESSION['userEmail']);
+	$sessUserId = $_SESSION['userId'];
+	$sessUserIsAdmin = $_SESSION['userIsAdmin'];
+	$sessUserEmail = $_SESSION['userEmail'];
+	echo $sessUserIsAdmin;
 } else {
-	// echo "NOOO";
-	$sessName = 'Hi Guest';
-	$sessStatus = 100;
+	$sessUserEmail = 'Guest';
+	$sessUserId = 100;
+	$sessUserIsAdmin = 100;
 }
-// }
 
 ?>
 
@@ -48,6 +49,7 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 	<link rel="stylesheet" href="/assets/css/style.css">
 	<link rel="stylesheet" href="/assets/css/responsive.css">
 	<link rel="stylesheet" href="/assets/css/custom.css">
+	<link rel="stylesheet" href="/assets/css/profile.css">
 </head>
 
 <body>
@@ -63,28 +65,37 @@ if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
 				<div class="collapse navbar-collapse" id="navbars-rs-food">
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item  active"><a class="nav-link" href="index.php">Home</a></li>
-
 						<li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+						<?php if ($sessUserIsAdmin == '0') { ?>
+							<li class="nav-item"><a class="nav-link " href="bookRoom.php">Book A Room</a></li>
+							<li class="nav-item"><a class="nav-link " href="bookFood.php">Order Food</a></li>
+						<?php }?>
+						<?php if ($sessUserIsAdmin == '1') { ?>
+							<li class="nav-item"><a class="nav-link " href="addRoom.php">Add A Room</a></li>
+							<li class="nav-item"><a class="nav-link " href="addFood.php">Add A Food</a></li>
+						<?php }?>
+						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+
+						<?php if ($sessUserIsAdmin == '0' || $sessUserIsAdmin == '1') { ?>
 						<li class="nav-item dropdown">
-							<a class="nav-link " href="bookRoom.php">Book A Room</a>
-						</li>
-						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Hi!!</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown-a">
-								<a class="dropdown-item" href="blog.php">blog</a>
-								<a class="dropdown-item" href="blog-details.php">blog Single</a>
+								<a class="dropdown-item" href="dashbord.php">Dashbord</a>
+								<form  method="POST" action="./templates/head.php" style="cursor: pointer; background-color: #d0a772;">
+									<input class="dropdown-item" name="signout" type="submit" value="Sign Out" style="cursor: pointer; background-color: #d0a772;">
+								</form>
+
 							</div>
 						</li>
-						<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
-						<?php if ($sessStatus == '0' || $sessStatus == '1') { ?>
-							<!-- <li class="nav-item"><button class="nav-link">Sign Out</button></li> -->
-							<li class="nav-item">
-								<form class="nav-link" method="POST" action="./templates/head.php">
-									<input name="signout" type="submit" value="Sign Out">
-								</form>
-							</li>
 						<?php } else { ?>
-							<li class="nav-item"><a class="nav-link" href="auth.php">Login/SignUp</a></li>
-						<?php } ?>
+							<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="auth.php" id="dropdown-a" data-toggle="dropdown">Account</a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="auth.php">SignIn</a>
+								<a class="dropdown-item" href="auth.php">Register</a>
+							</div>
+						</li>
+							<?php } ?>
 					</ul>
 				</div>
 			</div>

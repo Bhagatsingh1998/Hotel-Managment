@@ -2,7 +2,10 @@
 require('./templates/head.php');
 require('./config/dbConnect.php');
 
-session_unset();
+unset($_SESSION['userId']);
+unset($_SESSION['userEmail']);
+unset($_SESSION['userIsAdmin']);
+session_destroy();
 
 if (isset($_POST['signup'])) {
 	$name = mysqli_real_escape_string($conn, $_POST['name']);
@@ -10,12 +13,13 @@ if (isset($_POST['signup'])) {
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
 	$cpassword = mysqli_real_escape_string($conn, $_POST['cpassword']);
 	$phone = mysqli_real_escape_string($conn, $_POST['phone']);
+	$address = mysqli_real_escape_string($conn, $_POST['address']);
 
 	if ($password == $cpassword) {
 		$hash = password_hash($password, PASSWORD_DEFAULT);
 		echo ($name . $email . $hash . $phone);
-		$isAdmin = false;
-		$sql = "INSERT INTO registrations(name, email, password, phone, isAdmin) VALUES('$name', '$email', '$hash', '$phone', $isAdmin)";
+		$isAdmin = '0';
+		$sql = "INSERT INTO registrations(name, email, password, phone, address, isAdmin) VALUES('$name', '$email', '$hash', '$phone',' $address', '$isAdmin')";
 		if (mysqli_query($conn, $sql)) {
 			header('Location: index.php');
 		} else {
@@ -30,7 +34,7 @@ if (isset($_POST['login'])) {
 	$regPass = mysqli_real_escape_string($conn, $_POST['reg-pass']);
 
 	// write query for all emails
-	$allEmailsSql = "SELECT email, password, isAdmin from registrations";
+	$allEmailsSql = "SELECT * from registrations";
 	// get the result set (set of rows)
 	$allEmalsRes =  mysqli_query($conn, $allEmailsSql);
 	// fetch the resulting rows as an array
@@ -40,37 +44,20 @@ if (isset($_POST['login'])) {
 	// free the $result from memory (good practise)
 	mysqli_free_result($allEmalsRes);
 
-	// class sessionInfo {		
-	// 	var $sessionName;
-	// 	var $sessionStatus;
-
-	// 	function setStatus($s) {
-	// 		$this-> sessionStatus = $s;
-	// 	}
-
-	// 	function setName($n) {
-	// 		$this-> sessionName = $n;
-	// 	} 
-	// }
-
-	foreach($allEmailsArr as $e):
+	foreach ($allEmailsArr as $e) :
 		// print_r($e);
-		if($regEmail == $e['email']) {
-			// echo $e['email'];
-			$verfiyPassword = password_verify($regPass, $e['password']); 
-			if($verfiyPassword) {
+		if ($regEmail == $e['email']) {
+			$verfiyPassword = password_verify($regPass, $e['password']);
+			if ($verfiyPassword) {
 				echo ("CORRECT");
-				// $sess = new sessionInfo;
-				// $sess -> setName($regEmail);
-				// $sess -> setStatus($e['isAdmin']);
-				// unset($_SESSION['user']);
-				session_start(); 
-				$_SESSION['user'] = $regEmail;
-				$_SESSION['userStatus'] = $e['isAdmin'];
-				print_r($_SESSION['user']);
-				print_r($_SESSION['userStatus']);
+				session_start();
+				$_SESSION['userEmail'] = $regEmail;
+				$_SESSION['userIsAdmin'] = $e['isAdmin'];
+				$_SESSION['userId'] = $e['idregistrations'];
+
+				echo $_SESSION['userEmail'] . $_SESSION['userIsAdmin'] . $_SESSION['userId'];
 				header('Location: index.php');
-			}	else {
+			} else {
 				echo "INCORRECT";
 			}
 		}
@@ -78,9 +65,7 @@ if (isset($_POST['login'])) {
 
 
 	// close connection
-	mysqli_close($conn);   
-
-
+	mysqli_close($conn);
 }
 
 ?>
@@ -128,6 +113,12 @@ if (isset($_POST['login'])) {
 						<div class="col-md-12">
 							<div class="form-group">
 								<input type="text" placeholder="Your Phone Number" id="phone" class="form-control" name="phone" required data-error="Please enter your Phone Number">
+								<div class="help-block with-errors"></div>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="text" placeholder="Your Address" id="address" class="form-control" name="address" required data-error="Please enter your Address">
 								<div class="help-block with-errors"></div>
 							</div>
 						</div>

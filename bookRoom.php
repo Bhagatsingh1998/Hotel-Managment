@@ -1,4 +1,26 @@
-<?php require('./templates/head.php') ?>
+<?php 
+	require('./templates/head.php'); 
+	require('./config/dbConnect.php');
+
+	if(isset($_POST['bookRoom'])) {
+		$checkin = mysqli_real_escape_string($conn, $_POST['checkin']);
+		$checkout = mysqli_real_escape_string($conn, $_POST['checkout']);
+		$checkTime = mysqli_real_escape_string($conn, $_POST['checkTime']);
+		$persons = mysqli_real_escape_string($conn, $_POST['persons']);
+		$roomType = mysqli_real_escape_string($conn, $_POST['roomType']);
+		$userId = mysqli_real_escape_string($conn, $sessUserId);
+
+		echo $checkin.$checkout.$checkTime.$persons.$roomType.$userId;
+		$sql = "INSERT INTO booked_rooms(checkin, checkout, checkinTime, persons, roomType, userId) VALUES('$checkin', '$checkout', '$checkTime', '$persons', '$roomType', '$userId')";
+
+		if(mysqli_query($conn, $sql)) {
+			header('Location: index.php');
+		} else {
+			echo 'query error' . mysqli_error($conn);
+		}
+	}
+
+?>
 
 <!-- Start All Pages -->
 <div class="all-page-title page-breadcrumb">
@@ -26,100 +48,75 @@
 		<div class="row">
 			<div class="col-lg-12 col-sm-12 col-xs-12">
 				<div class="contact-block">
-					<form id="contactForm">
+					<form id="contactForm" method="POST" action="bookRoom.php">
 						<div class="row">
 							<div class="col-md-12">
 								<h3>General Info</h3>
 								<div class="col-md-12">
 									<div class="form-group">
-										<input id="input_date" class="datepicker picker__input form-control" name="date" type="text" value="" equired data-error="Please enter Date" placeholder="Check In Date">
+										<input id="input_date" class="datepicker picker__input form-control" name="checkin" type="date" equired data-error="Please enter Date" placeholder="Check In Date">
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<input id="input_date" class="datepicker picker__input form-control" name="date" type="text" value="" equired data-error="Please enter Date" placeholder="Check Out Date">
+										<input id="input_date" class="datepicker picker__input form-control" name="checkout" type="date"  equired data-error="Please enter Date" placeholder="Check Out Date">
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<input id="input_time" class="time form-control picker__input" required data-error="Please enter time" placeholder="Check In Time">
+										<input id="input_time" class="time form-control picker__input" type="time" name="checkTime" required data-error="Please enter time" placeholder="Check In Time">
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<select class="custom-select d-block form-control" id="person" required data-error="Please select Person">
+										<select name="persons" class="custom-select d-block form-control" id="person" required data-error="Please select Person">
 											<option disabled selected>Select Person*</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
-
+											<option value="4">4</option>
+											<option value="5">5</option>
 										</select>
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<select class="custom-select d-block form-control" id="person" required data-error="Select Room Type">
+										<select name="roomType" class="custom-select d-block form-control" id="person" required data-error="Select Room Type">
 											<option disabled selected>Select Room Type*</option>
-											<option value="Delux">Delux</option>
 											<option value="Single">Single</option>
 											<option value="Dual">Dual </option>
-
+											<option value="Delux">Delux</option>
+											<option value="Primium">Primium</option>
+											<option value="V.I.P">V.I.P</option>
 										</select>
 										<div class="help-block with-errors"></div>
 									</div>
 								</div>
 
-								<div class="col-md-12">
+								<!-- <div class="col-md-12">
 									<div class="form-group">
-										<select class="custom-select d-block form-control" id="person" required data-error="Please select Room Number">
+										<select name="roomNum" class="custom-select d-block form-control" id="person" required data-error="Please select Room Number">
 											<option disabled selected>Please select Room Number</option>
-											<option value="1">D201</option>
+											<option value="1">D101</option>
 											<option value="2">D302</option>
-											<option value="3">D403</option>
-
+											<option value="3">D303</option>
+											<option value="3">D404</option>
+											<option value="3">D505</option>
 										</select>
 										<div class="help-block with-errors"></div>
-									</div>
-								</div>
-								<!-- <div class="col-md-6">
-									<h3>Contact Details</h3>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" class="form-control" id="name" name="name" placeholder="Customer Name" required data-error="Please enter Customer name">
-											<div class="help-block with-errors"></div>
-										</div>                                 
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" placeholder="Customer Email" id="email" class="form-control" name="email" required data-error="Please enter Customer email">
-											<div class="help-block with-errors"></div>
-										</div> 
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" placeholder="Customer Number" id="phone" class="form-control" name="phone" required data-error="Please enter Customer Numbar">
-											<div class="help-block with-errors"></div>
-										</div> 
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<input type="text" placeholder="Id Proof" id="phone" class="form-control" name="phone" required data-error="Please enter Customer Numbar">
-											<div class="help-block with-errors"></div>
-										</div> 
 									</div>
 								</div> -->
 								<div class="col-md-12">
 									<div class="submit-button text-center">
-										<button class="btn btn-common" id="submit" type="submit">Book Room</button>
+										<button class="btn btn-common" id="submit" name="bookRoom" type="submit">Book Room</button>
 										<div id="msgSubmit" class="h3 text-center hidden"></div>
 										<div class="clearfix"></div>
 									</div>
 								</div>
-
 							</div>
 					</form>
 				</div>
@@ -183,40 +180,5 @@
 	</div>
 </div>
 <!-- End Customer Reviews -->
-
-<!-- Start Contact info -->
-<div class="contact-imfo-box">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4">
-				<i class="fa fa-volume-control-phone"></i>
-				<div class="overflow-hidden">
-					<h4>Phone</h4>
-					<p class="lead">
-						+01 123-456-4590
-					</p>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<i class="fa fa-envelope"></i>
-				<div class="overflow-hidden">
-					<h4>Email</h4>
-					<p class="lead">
-						Customermail@gmail.com
-					</p>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<i class="fa fa-map-marker"></i>
-				<div class="overflow-hidden">
-					<h4>Location</h4>
-					<p class="lead">
-						800, Lorem Street, US
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 
 <?php require('./templates/end.php') ?>
